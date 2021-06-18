@@ -1,4 +1,5 @@
 import axios from "axios";
+import { add, fromUnixTime } from "date-fns";
 import { matchSorter } from "match-sorter";
 import { CryptonatorTicker } from "../../../../types";
 import Cache from "../../../infrastructure/redis";
@@ -17,7 +18,28 @@ export default class CoinRepository {
       const { data } = await axios.get(key);
       result = data as CryptonatorTicker;
 
-      await Cache.setAsync(key, result, "EX", 15);
+      // set timestamp or current time if none is provided
+      const timestamp = Number(result.timestamp) || new Date().getTime() / 1000;
+      // add 30 seconds to timestamp to account for cyrponator's delay
+      const expirationTime =
+        add(fromUnixTime(timestamp), {
+          seconds: 30,
+        }).getTime() / 1000;
+
+      // cache for any number of seconds larger than 0 and at most
+      const cacheSeconds =
+        Math.ceil(expirationTime - new Date().getTime() / 1000) > 0 &&
+        Math.ceil(expirationTime - new Date().getTime() / 1000) < 0
+          ? Math.ceil(expirationTime - new Date().getTime() / 1000)
+          : 15;
+
+      await Cache.setAsync(
+        key,
+        result,
+        "EX",
+        // expiration time - update time  => expiration seconds
+        cacheSeconds
+      );
     }
 
     return new Coin({

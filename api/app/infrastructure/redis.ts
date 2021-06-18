@@ -2,9 +2,9 @@ import redis from "redis";
 import { promisify } from "util";
 
 class Cache {
-  client: redis.RedisClient;
-  _getAsync: (key: string) => Promise<string | null>;
-  _setAsync: (
+  private client: redis.RedisClient;
+  private _getAsync: (key: string) => Promise<string | null>;
+  private _setAsync: (
     key: string,
     value: any,
     mode: "EX",
