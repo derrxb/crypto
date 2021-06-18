@@ -1,6 +1,8 @@
 import axios from "axios";
+import { matchSorter } from "match-sorter";
 import { CryptonatorTicker } from "../../../../../types";
 import Coin from "../entities/coin";
+import supportedCoins from "../lib/supported-coins.json";
 import { CoinName } from "../values/coin-name";
 
 export default class CoinRepository {
@@ -28,5 +30,24 @@ export default class CoinRepository {
     );
 
     return coins;
+  }
+
+  static async findCoins(query: string) {
+    return matchSorter(supportedCoins.rows, query, {
+      keys: ["name", "code"],
+    })
+      .slice(0, 50)
+      .map(
+        (result) =>
+          new Coin({
+            name: result.name,
+            ticker: result.name,
+            timestamp: new Date().getTime(),
+            change: 0,
+            price: 0,
+            target: "USD",
+            volume: 0,
+          })
+      );
   }
 }
