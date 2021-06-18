@@ -39,4 +39,4 @@ class Cache {
   }
 }
 
-export default Cache;
+export default new Cache(process.env.REDISCLOUD_URL);
