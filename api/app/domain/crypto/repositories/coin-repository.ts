@@ -12,14 +12,14 @@ export default class CoinRepository {
     const key = `https://api.cryptonator.com/api/ticker/${ticker}-usd`;
     let result: CryptonatorTicker | null;
 
-    const cache = app.locals.cache as Cache;
-    result = await cache.getAsync<CryptonatorTicker>(key);
+    const cache = app.locals.cache as () => Promise<Cache>;
+    result = await (await cache()).getAsync<CryptonatorTicker>(key);
 
     if (!result) {
       const { data } = await axios.get(key);
       result = data as CryptonatorTicker;
 
-      await cache.setAsync(key, result, "EX", 15);
+      await (await cache()).setAsync(key, result, "EX", 15);
     }
 
     return new Coin({
