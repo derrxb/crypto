@@ -23,7 +23,9 @@ const useCoins = (props: QueryProps) => {
     queryKey: ["coins", { tickers: props.tickers }],
     queryFn: () => getCoins(props),
     // refetch every 15 seconds
-    refetchInterval: 1000 * 5,
+    refetchInterval: 1000 * 15,
+    keepPreviousData: true,
+    retry: 3,
   });
 };
 
