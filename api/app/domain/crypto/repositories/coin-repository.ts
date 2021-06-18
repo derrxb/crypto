@@ -1,26 +1,34 @@
 import axios from "axios";
 import { matchSorter } from "match-sorter";
 import { CryptonatorTicker } from "../../../../../types";
+import Cache from "../../../infrastructure/redis";
 import Coin from "../entities/coin";
 import supportedCoins from "../lib/supported-coins.json";
 import { CoinName } from "../values/coin-name";
 
 export default class CoinRepository {
   static async getCoin(ticker: string) {
-    const result = await axios.get(
-      `https://api.cryptonator.com/api/ticker/${ticker}-usd`
-    );
+    const key = `https://api.cryptonator.com/api/ticker/${ticker}-usd`;
+    let result: CryptonatorTicker | null;
 
-    const data = result.data as CryptonatorTicker;
+    const cache = new Cache(process.env.REDISCLOUD_URL);
+    result = await cache.getAsync<CryptonatorTicker>(key);
+
+    if (!result) {
+      const { data } = await axios.get(key);
+      result = data as CryptonatorTicker;
+
+      await cache.setAsync(key, result, "EX", 15);
+    }
 
     return new Coin({
       ticker,
       name: new CoinName(ticker).getName(),
-      price: Number(data.ticker?.price || 0),
-      change: Number(data.ticker?.change || 0),
+      price: Number(result?.ticker?.price || 0),
+      change: Number(result?.ticker?.change || 0),
       target: "USD",
-      timestamp: Number(data.timestamp),
-      volume: Number(data.ticker?.volume || 0),
+      timestamp: Number(result?.timestamp),
+      volume: Number(result?.ticker?.volume || 0),
     });
   }
 
