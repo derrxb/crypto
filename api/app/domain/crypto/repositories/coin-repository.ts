@@ -16,11 +16,11 @@ export default class CoinRepository {
     return new Coin({
       ticker,
       name: new CoinName(ticker).getName(),
-      price: Number(data.ticker.price),
-      change: Number(data.ticker.change),
+      price: Number(data.ticker?.price || 0),
+      change: Number(data.ticker?.change || 0),
       target: "USD",
       timestamp: Number(data.timestamp),
-      volume: Number(data.ticker.volume),
+      volume: Number(data.ticker?.volume || 0),
     });
   }
 
@@ -41,7 +41,7 @@ export default class CoinRepository {
         (result) =>
           new Coin({
             name: result.name,
-            ticker: result.name,
+            ticker: result.code.toLowerCase(),
             timestamp: new Date().getTime(),
             change: 0,
             price: 0,
