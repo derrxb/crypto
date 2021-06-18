@@ -2,7 +2,7 @@ import React from "react";
 
 const CoinSkeleton = () => {
   return (
-    <div className="flex flex-col m-2 p-4 w-80 border-2 border-indigo-600 border-solid rounded shadow-lg animate-pulse">
+    <div className="flex flex-col mb-4 ml-0 p-4 border-2 border-indigo-600 border-solid rounded shadow-lg w-full md:w-80 md:m-4 animate-pulse">
       <div className="flex justify-between align-middle mb-4">
         <div className="h-4 bg-indigo-400 rounded w-20" />
         <span className="h-4 bg-indigo-400 rounded w-10" />

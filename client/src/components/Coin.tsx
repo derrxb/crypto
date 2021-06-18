@@ -8,7 +8,7 @@ type Props = {
 
 const Coin = ({ coin }: Props) => {
   return (
-    <div className="flex flex-col m-4 ml-0 p-4 w-80 border-2 border-indigo-600 border-solid rounded shadow-lg ">
+    <div className="flex flex-col mb-4 ml-0 p-4 border-2 border-indigo-600 border-solid rounded shadow-lg w-full md:w-80 md:m-4">
       <div className="flex justify-between align-middle">
         <h1 className="font-bold text-lg mr-2">{coin.name}</h1>
         <span className="uppercase text-gray-400">{coin.ticker}</span>

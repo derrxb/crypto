@@ -14,14 +14,12 @@ function App() {
     <div className="flex flex-col w-full h-full">
       <Header />
 
-      <div className="container mx-2 md:mx-auto">
+      <div className="flex flex-col mx-5 mb-5 lg:mx-20">
         <Search
           onResultSelect={(selected: CoinModel) =>
             setUserCoins([...userCoins, selected.ticker])
           }
         />
-
-        <hr className="text-gray-300 my-4" />
 
         <CoinsList
           coins={coins.data}
