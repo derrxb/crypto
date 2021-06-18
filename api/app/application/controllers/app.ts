@@ -4,6 +4,10 @@ import FindCoins from "../services/find-coins";
 import GetCoins from "../services/get-coins";
 import Failure from "../services/lib/error";
 
+router.get("/", async (request, response) => {
+  response.status(200).send({ message: "Alive!" });
+});
+
 /**
  * NOTE: If we go strictly by the REST specs we would use a HTTP Get here. However,
  * we would like to client to send the coins list in the body of the request rather
