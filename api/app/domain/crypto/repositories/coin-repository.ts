@@ -1,5 +1,6 @@
 import axios from "axios";
 import { matchSorter } from "match-sorter";
+import { app } from "../../../../config/index";
 import { CryptonatorTicker } from "../../../../types";
 import Cache from "../../../infrastructure/redis";
 import Coin from "../entities/coin";
@@ -11,7 +12,7 @@ export default class CoinRepository {
     const key = `https://api.cryptonator.com/api/ticker/${ticker}-usd`;
     let result: CryptonatorTicker | null;
 
-    const cache = new Cache(process.env.REDISCLOUD_URL);
+    const cache = app.locals.cache as Cache;
     result = await cache.getAsync<CryptonatorTicker>(key);
 
     if (!result) {
