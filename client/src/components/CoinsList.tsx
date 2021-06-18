@@ -1,9 +1,9 @@
-import { CoinModel } from "../types";
+import { CoinModel } from "../../../types";
 import Coin from "./Coin";
 import CoinSkeleton from "./CoinSkeleton";
 
 type Props = {
-  coins?: { [key: string]: CoinModel };
+  coins?: CoinModel[];
   loading: boolean;
 };
 
@@ -19,7 +19,7 @@ const CoinsList = ({ coins, loading }: Props) => {
         : null}
 
       {coins
-        ? Object.keys(coins).map((key) => <Coin key={key} coin={coins[key]} />)
+        ? coins.map((coin) => <Coin key={coin.ticker} coin={coin} />)
         : null}
     </div>
   );
