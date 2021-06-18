@@ -4,7 +4,7 @@ const useUserCoins = () => {
   const [selected, setSelected] = useState<string[]>(
     window.localStorage.getItem("coins")
       ? JSON.parse(window.localStorage.getItem("coins") as string)
-      : ["btc", "eth", "doge", "xpr"]
+      : []
   );
 
   useEffect(() => {

@@ -16,7 +16,7 @@ const CoinsList = ({ coins, loading, reset }: Props) => {
 
   return (
     <>
-      <div className="flex justify-between flex-col md:flex-row">
+      <div className="flex flex-col justify-between md:flex-row py-2">
         <div className="flex flex-col">
           <h2 className="font-bold text-lg">Tracked coins</h2>
           <span className="text-sm text-gray-700">
@@ -34,7 +34,7 @@ const CoinsList = ({ coins, loading, reset }: Props) => {
           ? [1, 2, 3, 4].map((index) => <CoinSkeleton key={index} />)
           : null}
 
-        {coins
+        {coins && coins.length > 0
           ? coins.map((coin) => <Coin key={coin.ticker} coin={coin} />)
           : null}
       </div>
