@@ -38,6 +38,8 @@ If additional business rules were to be added they could easily be done in the E
 
 Please find attached the architecture diagram.
 
+![architecture](https://user-images.githubusercontent.com/15827103/122616256-9f4d3b80-d0bc-11eb-84cc-1f81cf61542f.png)
+
 ### Limitations and things I would love to improve on
 
 - Implement websockets. Due to the nature of the Cryptonator API (it updated every second) I opted for a simple approach to let the client re-request the data they needed.
