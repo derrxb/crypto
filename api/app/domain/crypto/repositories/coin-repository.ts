@@ -1,6 +1,6 @@
 import axios from "axios";
 import { matchSorter } from "match-sorter";
-import { CryptonatorTicker } from "../../../../../types";
+import { CryptonatorTicker } from "../../../../types";
 import Cache from "../../../infrastructure/redis";
 import Coin from "../entities/coin";
 import supportedCoins from "../lib/supported-coins.json";

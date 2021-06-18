@@ -3,6 +3,10 @@ import HttpResponse from "../../presentation/representers/http-response-represen
 import FindCoins from "../services/find-coins";
 import GetCoins from "../services/get-coins";
 import Failure from "../services/lib/error";
+import cors = require("cors");
+
+app.use(cors());
+router.use(cors());
 
 router.get("/", async (request, response) => {
   response.status(200).send({ message: "Alive!" });

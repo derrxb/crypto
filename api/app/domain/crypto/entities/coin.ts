@@ -1,4 +1,4 @@
-import { CoinModel } from "../../../../../types";
+import { CoinModel } from "../../../../types";
 
 export default class Coin implements CoinModel {
   ticker: string;

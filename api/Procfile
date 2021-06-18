@@ -1,0 +1,3 @@
+web: node /app/dist/app/application/controllers/app.js
+
+
