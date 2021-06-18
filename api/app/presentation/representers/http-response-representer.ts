@@ -32,7 +32,7 @@ class HttpResponse {
     internal_error: 500,
   };
 
-  constructor(status: STATUS_CODE, message: string) {
+  constructor(status: STATUS_CODE, message: any) {
     this.status = status;
     this.message = message;
   }
