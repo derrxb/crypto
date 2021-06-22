@@ -42,5 +42,5 @@ Please find attached the architecture diagram.
 
 ### Limitations and things I would love to improve on
 
-- Implement websockets. Due to the nature of the Cryptonator API (it updated every second) I opted for a simple approach to let the client re-request the data they needed.
+- Implement websockets. Due to the nature of the Cryptonator API (it updated every 30 seconds) I opted for a simple approach to let the client re-request the data they needed.
 - Automated tests: I think a number of features could have been tested in automated tests. i.e Adding a coin to your watch list, searching for coins, etc.
